@@ -7,7 +7,6 @@
   "license": "Unlicensed",
   "private": true,
   "dependencies": {
-    "discord.js": "^14.7.1",
     "gradient-string": "^2.0.2",
     "https": "^1.0.0"
   }
