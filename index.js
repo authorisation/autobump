@@ -1,9 +1,11 @@
 const CONFIG = require('./config.json');
 const gradient = require('gradient-string');
-const https = require('https')
 let sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
 var temp = "nullface";
+
+// Function shit
+require('./functions/createAccount')();
+require('./functions/misc')();
 
 let INTRODUCTION = gradient.pastel.multiline([
     "-------------------------------",
@@ -15,4 +17,8 @@ let INTRODUCTION = gradient.pastel.multiline([
 console.clear();
 process.title = "AUTO BUMP | Logged in as $ " + `${temp}`;
 console.log(INTRODUCTION);
-sleep(5000)
+
+//DEBUG
+console.log(gradient.pastel("[DEBUG] " + randomFingerprint()));
+console.log(gradient.pastel("[DEBUG] " + randomString(12) + "@dv4.wtf\n"));
+createAccount();

@@ -8,6 +8,6 @@
   "private": true,
   "dependencies": {
     "gradient-string": "^2.0.2",
-    "https": "^1.0.0"
+    "node-fetch": "2.6.7"
   }
 }
