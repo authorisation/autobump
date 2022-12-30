@@ -1,0 +1,14 @@
+{
+  "name": "autobump",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/authorisation/autobump.git",
+  "author": "-",
+  "license": "Unlicensed",
+  "private": true,
+  "dependencies": {
+    "discord.js": "^14.7.1",
+    "gradient-string": "^2.0.2",
+    "https": "^1.0.0"
+  }
+}
