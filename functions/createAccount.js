@@ -18,10 +18,12 @@ let body = {
     "captcha_key": null
 }
 var creds = JSON.stringify(body);
+var obj = JSON.parse(creds);
 
 module.exports = function() { 
-    this.createAccount = function() {
+    this.createAccount = async function() {
         console.log(gradient.pastel("[+] Starting Account creation"));
+        body['captcha_key'] = await solveCaptcha(); //Does not work as it's an async function, it will just continue without waiting for it to solve. Fix :)
         fetch(ENDPOINT, {
             method: 'POST',
             body: creds,
@@ -49,9 +51,9 @@ module.exports = function() {
             By default "captcha_key" is "null" but once we enter the response 2Captcha gave us Discord should let us pass.
             Now the thing is, the "captcha_sitekey" is always the same which makes this very easy.
             */ console.log(json)
+            console.log(gradient.pastel("\n[DEBUG] \n" + creds + "\n[DEBUG END]"));
 
         })
-        var obj = JSON.parse(creds);
         console.log(gradient.pastel("[!] Using email: " + obj.email))
         console.log(gradient.pastel("[!] Using username: " + obj.username))
         console.log(gradient.pastel("[!] Using password: " + obj.password))

@@ -18,7 +18,13 @@ module.exports = function() {
             "data" is the solved key, and no clue what "id" is.
             So you grab "data" and put it alongside the credentials to register.
             */ 
-           console.log(res)
+            var solved_data = JSON.stringify(res);
+            var obj = JSON.parse(solved_data);
+            console.log(gradient.pastel("[+] Solved captcha.\n"));
+            return obj.data;
+        })
+        .catch((err) => {
+            console.error(gradient.pastel("[-] Failed solving captcha, \n" + err.message))
         })
     }
 }

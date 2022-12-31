@@ -1,10 +1,11 @@
 const CONFIG = require('./config.json');
 const gradient = require('gradient-string');
-const solveCaptcha = require('./functions/captchaUtils');
 let sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+//this is the username its something random idk
 var temp = "nullface";
 
-// Function shit
+//Function shit
 require('./functions/createAccount.js')();
 require('./functions/misc.js')();
 require('./functions/captchaUtils.js')();
