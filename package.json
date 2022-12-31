@@ -7,6 +7,7 @@
   "license": "Unlicensed",
   "private": true,
   "dependencies": {
+    "2captcha": "^3.0.5",
     "gradient-string": "^2.0.2",
     "node-fetch": "2.6.7"
   }

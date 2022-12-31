@@ -22,7 +22,6 @@ var creds = JSON.stringify(body);
 module.exports = function() { 
     this.createAccount = function() {
         console.log(gradient.pastel("[+] Starting Account creation"));
-        /*
         fetch(ENDPOINT, {
             method: 'POST',
             body: creds,
@@ -37,9 +36,21 @@ module.exports = function() {
                 "X-Super-Properties": "eyJvcyI6IldpbmRvd3MiLCJicm93c2VyIjoiRmlyZWZveCIsImRldmljZSI6IiIsInN5c3RlbV9sb2NhbGUiOiJlbi1VUyIsImJyb3dzZXJfdXNlcl9hZ2VudCI6Ik1vemlsbGEvNS4wIChXaW5kb3dzIE5UIDEwLjA7IFdpbjY0OyB4NjQ7IHJ2OjEwOS4wKSBHZWNrby8yMDEwMDEwMSBGaXJlZm94LzEwOS4wIiwiYnJvd3Nlcl92ZXJzaW9uIjoiMTA5LjAiLCJvc192ZXJzaW9uIjoiMTAiLCJyZWZlcnJlciI6IiIsInJlZmVycmluZ19kb21haW4iOiIiLCJyZWZlcnJlcl9jdXJyZW50IjoiIiwicmVmZXJyaW5nX2RvbWFpbl9jdXJyZW50IjoiIiwicmVsZWFzZV9jaGFubmVsIjoic3RhYmxlIiwiY2xpZW50X2J1aWxkX251bWJlciI6MTY1NDg1LCJjbGllbnRfZXZlbnRfc291cmNlIjpudWxsfQ=="
             }
         }).then(res => res.json()).then(json => {
-            /* DEBUG console.log(json)
+            /*
+            DEBUG 
+            So an example response is: 
+            {
+                captcha_key: [ 'captcha-required' ],
+                captcha_sitekey: '4c672d35-0701-42b2-88c3-78380b0db560',
+                captcha_service: 'hcaptcha'
+            }
+            As we can see it returns a "captcha_sitekey" using this we can solve the captcha using 2Captchas API. 
+            2Captcha should return another string that you have to specify in the body with the name "captcha_key".
+            By default "captcha_key" is "null" but once we enter the response 2Captcha gave us Discord should let us pass.
+            Now the thing is, the "captcha_sitekey" is always the same which makes this very easy.
+            */ console.log(json)
+
         })
-        */
         var obj = JSON.parse(creds);
         console.log(gradient.pastel("[!] Using email: " + obj.email))
         console.log(gradient.pastel("[!] Using username: " + obj.username))
