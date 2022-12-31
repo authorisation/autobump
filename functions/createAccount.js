@@ -1,14 +1,16 @@
 const fetch = require('node-fetch');
 const gradient = require('gradient-string');
+const CONFIG = require("../config.json");
 
 const ENDPOINT = "https://discord.com/api/v9/auth/register";
 const CAPTCHA_ENDPOINT = "";
+
 
 require('./misc')();
 
 let body = {
     "fingerprint": `${randomFingerprint()}`,
-    "email": `${randomString(12)}` + "@dv4.wtf",
+    "email": `${randomString(12)}` + "@dv4.email",
     "username": `${randomString(14)}`,
     "password": `${randomString(18)}`,
     "invite": null,
@@ -20,10 +22,22 @@ let body = {
 var creds = JSON.stringify(body);
 var obj = JSON.parse(creds);
 
+const captcha = require("2captcha");
+const solver = new captcha.Solver(CONFIG.twocaptcha)
+
 module.exports = function() { 
-    this.createAccount = async function() {
+    this.createAccount = function() {
         console.log(gradient.pastel("[+] Starting Account creation"));
-        body['captcha_key'] = await solveCaptcha(); //Does not work as it's an async function, it will just continue without waiting for it to solve. Fix :)
+        console.log(gradient.pastel("[+] Solving captcha..."));
+        solver.hcaptcha(CONFIG.captchasitekey, 'discord.com').then((res) => {
+            console.log(res);
+            var solved_data = JSON.stringify(res);
+            var obj = JSON.parse(solved_data);
+            console.log(gradient.pastel("\n[DEBUG] " + obj.data + "\n")) //throws key
+            body.captcha_key = obj.data;
+        }).catch((err) => {
+            console.error(gradient.pastel("[-] Failed solving captcha, \n" + err))
+        })
         fetch(ENDPOINT, {
             method: 'POST',
             body: creds,
@@ -51,7 +65,6 @@ module.exports = function() {
             By default "captcha_key" is "null" but once we enter the response 2Captcha gave us Discord should let us pass.
             Now the thing is, the "captcha_sitekey" is always the same which makes this very easy.
             */ console.log(json)
-            console.log(gradient.pastel("\n[DEBUG] \n" + creds + "\n[DEBUG END]"));
 
         })
         console.log(gradient.pastel("[!] Using email: " + obj.email))

@@ -23,6 +23,6 @@ console.log(INTRODUCTION);
 
 //DEBUG
 console.log(gradient.pastel("[DEBUG] " + randomFingerprint()));
-console.log(gradient.pastel("[DEBUG] " + randomString(12) + "@dv4.wtf\n"));
+console.log(gradient.pastel("[DEBUG] " + randomString(12) + "@dv4.email\n"));
 
 createAccount();

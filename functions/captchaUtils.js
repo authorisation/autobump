@@ -4,9 +4,9 @@ const solver = new captcha.Solver(CONFIG.twocaptcha)
 const gradient = require("gradient-string");
 
 module.exports = function() {
-    this.solveCaptcha = function() {
+    this.solveCaptcha = async function(callback) {
         console.log(gradient.pastel("[+] Solving captcha..."));
-        solver.hcaptcha(CONFIG.captchasitekey, "https://discord.com/api/v9/auth/register").then((res) => {
+        await solver.hcaptcha(CONFIG.captchasitekey, "discord.com").then((res) => {
             /* 
             DEBUG 
             OK This broken idk gotta fix later
@@ -21,7 +21,8 @@ module.exports = function() {
             var solved_data = JSON.stringify(res);
             var obj = JSON.parse(solved_data);
             console.log(gradient.pastel("[+] Solved captcha.\n"));
-            return obj.data;
+            console.log(gradient.pastel("[DEBUG] SOLVED KEY IS:\n\n" + obj.data));
+            callback(obj.data);
         })
         .catch((err) => {
             console.error(gradient.pastel("[-] Failed solving captcha, \n" + err.message))
